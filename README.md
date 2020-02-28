@@ -4,7 +4,7 @@ This is a UI tool used to quickly download description and all images related to
 Currently the tool only works for the Foster Organization [2 Blondes All Breed Rescue](https://2babrescue.com/).
 
 ## Download
-Visit the [Releases](https://github.com/Piszmog/pet-spotlight/releases) page to download the Windows Binary.
+Visit the [Releases](https://github.com/Piszmog/pet-spotlight-ui/releases) page to download the Windows Binary.
 
 ## Running
 Simply double click the executable to launch the application.
