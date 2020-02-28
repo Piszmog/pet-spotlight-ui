@@ -29,7 +29,7 @@ func main() {
 	errorEntry := widget.NewEntry()
 	errorCloseButton := widget.NewButton("Close", func() {
 		errorEntry.SetText("")
-		errorWindow.Close()
+		errorWindow.Hide()
 	})
 	errorWindow.SetContent(widget.NewVBox(errorEntry, errorCloseButton))
 	errorChannel := make(chan error, 10)
@@ -59,14 +59,14 @@ func main() {
 	progressBar.Hide()
 	// Create download button
 	downloadWindow := mainApp.NewWindow("Download Progress")
-	downloadCloseButton := widget.NewButton("Close", func() {
-		downloadWindow.Close()
-	})
 	downloadEntry := widget.NewMultiLineEntry()
-	downloadEntry.SetText("Downloading...\n")
+	downloadCloseButton := widget.NewButton("Close", func() {
+		downloadEntry.SetText("")
+		downloadWindow.Hide()
+	})
 	downloadWindow.SetContent(widget.NewVBox(downloadEntry, downloadCloseButton))
-	progressChannel := make(chan string, 10)
 	downloadButton := widget.NewButton("Download", func() {
+		progressChannel := make(chan string, 10)
 		// Create directory where the dog info will go
 		if err := io.MakeDir(baseDirectoryEntry.Text); err != nil {
 			errorEntry := widget.NewEntry()
@@ -85,8 +85,9 @@ func main() {
 				errorWindow.Show()
 			}
 		}()
-		for found := range progressChannel {
-			downloadEntry.SetText(downloadEntry.Text + found + "\n")
+		downloadEntry.SetText("Downloading...\n")
+		for progress := range progressChannel {
+			downloadEntry.SetText(downloadEntry.Text + progress + "\n")
 		}
 		progressBar.Stop()
 		progressBar.Hide()
@@ -94,7 +95,7 @@ func main() {
 	// Create foster window
 	boardingDogsWindow := mainApp.NewWindow("Boarding Dogs")
 	boardingCloseButton := widget.NewButton("Close", func() {
-		boardingDogsWindow.Close()
+		boardingDogsWindow.Hide()
 	})
 	// Set the window content
 	mainWindow.SetContent(widget.NewVBox(

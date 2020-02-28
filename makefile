@@ -5,7 +5,7 @@ GO_CLEAN=$(GO_CMD) clean
 GO_TEST=$(GO_CMD) test
 
 # Binary names
-BINARY_NAME=pet-spotlight
+BINARY_NAME=pet-spotlight-ui
 BINARY_WINDOWS=$(BINARY_NAME).exe
 
 # Commands
