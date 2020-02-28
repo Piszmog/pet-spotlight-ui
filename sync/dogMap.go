@@ -14,7 +14,7 @@ type DogMap struct {
 func InitializeMap(dogs []string) *DogMap {
 	var m sync.Map
 	for _, dog := range dogs {
-		m.Store(strings.ToLower(dog), false)
+		m.Store(strings.TrimSpace(strings.ToLower(dog)), false)
 	}
 	return &DogMap{m: &m}
 }
